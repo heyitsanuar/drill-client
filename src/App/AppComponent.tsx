@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout } from 'antd';
-import AnswerSheetComponent from 'Features/AnswerSheet/AnswerSheetComponent';
+import AnswerSheetComponent from 'features/AnswerSheet/AnswerSheetComponent';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
