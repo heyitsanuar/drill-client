@@ -3,6 +3,7 @@ import TimelineComponent from "./TimelineComponnet";
 import { createUseStyles } from "react-jss";
 import logoImg from "shared/assets/img/logo.png";
 import TimerComponent from "./TimerComponent";
+import { SummaryView } from "app/models/SummaryModel";
 
 const useStyles = createUseStyles({
   root: {
@@ -16,8 +17,12 @@ const useStyles = createUseStyles({
   },
 });
 
-const SummaryComponent: React.FC = (props) => {
+const SummaryComponent: React.FC<SummaryView> = (props) => {
   const classes = useStyles();
+  const { scores } = props;
+
+  const total: any = scores?.reduce((acc, curr) => acc + curr);
+  const finalScore = (parseInt(total) * 10) / 3;
 
   return (
     <div className={classes.root}>
@@ -26,7 +31,7 @@ const SummaryComponent: React.FC = (props) => {
       <TimelineComponent />
       <div className={classes.congratulations}>
         <h2>Congratulations!</h2>
-        <h3>You just got a 630 score</h3>
+        <h3>You just got a {finalScore} score</h3>
       </div>
       <TimerComponent />
     </div>

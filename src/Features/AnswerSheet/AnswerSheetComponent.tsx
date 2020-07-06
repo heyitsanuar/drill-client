@@ -5,6 +5,7 @@ import SummaryComponent from "features/Timeline/SummaryComponent";
 import { AnswerKey } from "app/models/AnswerSheetModel";
 import { createUseStyles } from "react-jss";
 import { tests } from "shared/assets/key-scripts/dictionary";
+import scoresJson from "shared/assets/key-scripts/score-chart.json";
 import { isNull } from "util";
 //@ts-ignore
 import { v4 as uuid } from "uuid";
@@ -95,7 +96,14 @@ const AnswerSheetComponent: React.FC = (props) => {
   return (
     <Row>
       <Col span={6}>
-        <SummaryComponent />
+        {hasSubmitted && (
+          <SummaryComponent
+            scores={answerResults.sections.map((i) => {
+              //@ts-ignore
+              return scoresJson[i.title][i.results?.filter(Boolean).length];
+            })}
+          />
+        )}
       </Col>
       <Col span={18}>
         <div className={classes.root}>
