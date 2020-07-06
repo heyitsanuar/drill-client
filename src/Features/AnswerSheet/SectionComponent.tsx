@@ -23,7 +23,7 @@ const SectionComponent: React.FC<SectionView> = (props) => {
       <div className={classes.root}>
         {answers.map((answer, questionIndex) => (
           <QuestionComponent
-            key={questionIndex}
+            key={questionIndex}            
             number={questionIndex}
             isCorrect={results ? results[questionIndex] : false}
             hasSubmitted={hasSubmitted}

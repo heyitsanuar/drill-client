@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button } from "antd";
 import { createUseStyles } from "react-jss";
+import Timer from "react-compound-timer";
 
 const useStyles = createUseStyles({
   root: {},
@@ -25,22 +26,74 @@ const useStyles = createUseStyles({
 const TimerComponent: React.FC = (props) => {
   const classes = useStyles();
   const [isEnabled, setIsEnabled] = React.useState<boolean>(false);
-  const [time, setTime] = React.useState<number>(0);
 
   return (
     <div className={classes.root}>
       <h2>Stopwatch</h2>
-      <h1>00:00</h1>
-      <div className={classes.btnContainer}>
-        {isEnabled ? (
-          <Button className={classes.btn} type='primary' danger>
-            Stop
-          </Button>
-        ) : (
-          <Button className={`${classes.btn} ${classes.btnStart}`}>Start</Button>
+      <Timer
+        initialTime={0}
+        formatValue={(val: any) => (val < 10 ? `0${val}` : val)}
+        startImmediately={false}
+      >
+        {({ start, resume, pause, stop, reset, timerState, getTime }: any) => (
+          <React.Fragment>
+            <h1>
+              <Timer.Hours />:
+              <Timer.Minutes />:
+              <Timer.Seconds />
+            </h1>
+            <div className={classes.btnContainer}>
+              {getTime() === 0 && !isEnabled ? (
+                <Button
+                  className={`${classes.btn} ${classes.btnStart}`}
+                  onClick={() => {
+                    setIsEnabled(true);
+                    start();
+                  }}
+                >
+                  Start
+                </Button>
+              ) : (
+                <React.Fragment>
+                  {isEnabled ? (
+                    <Button
+                      className={classes.btn}
+                      type='primary'
+                      danger
+                      onClick={() => {
+                        setIsEnabled(false);
+                        pause();
+                      }}
+                    >
+                      Stop
+                    </Button>
+                  ) : (
+                    <Button
+                      className={classes.btn}
+                      type='primary'
+                      danger
+                      onClick={() => {
+                        setIsEnabled(true);
+                        resume();
+                      }}
+                    >
+                      Resume
+                    </Button>
+                  )}
+                  <Button
+                    className={classes.btn}
+                    onClick={() => {
+                      reset();
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </React.Fragment>
+              )}
+            </div>
+          </React.Fragment>
         )}
-        {time !== 0 && <Button className={classes.btn}>Reset</Button>}
-      </div>
+      </Timer>
     </div>
   );
 };
