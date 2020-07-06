@@ -7,6 +7,7 @@ export interface ISection {
 }
 
 export interface AnswerKey {
+  title: string;
   sections: ISection[];
 }
 

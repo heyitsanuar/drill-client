@@ -5,7 +5,7 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   root: {
-    width: "75%",
+    width: "85%",
     margin: "auto",
     background: "none",
   },
