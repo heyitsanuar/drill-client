@@ -103,7 +103,7 @@ const AnswerSheetComponent: React.FC = (props) => {
             className={classes.buttons}
             type='primary'
             onClick={handleSubmit}
-            disabled={!canSubmit()}
+            //disabled={!canSubmit()}
           >
             Check answers
           </Button>

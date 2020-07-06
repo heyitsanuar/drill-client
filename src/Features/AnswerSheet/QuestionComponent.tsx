@@ -12,6 +12,9 @@ const useStyles = createUseStyles({
     display: "inline-block",
     width: 30,
   },
+  invisible: {
+    visibility: "hidden",
+  },
 });
 
 const QuestionComponent: React.FC<QuestionView> = (props) => {
@@ -26,15 +29,13 @@ const QuestionComponent: React.FC<QuestionView> = (props) => {
       <Radio value='B'>B</Radio>
       <Radio value='C'>C</Radio>
       <Radio value='D'>D</Radio>
-      {hasSubmitted && (
-        <React.Fragment>
-          {isCorrect ? (
-            <CheckCircleTwoTone twoToneColor='#52c41a' />
-          ) : (
-            <CloseCircleTwoTone twoToneColor='#c0392b' />
-          )}
-        </React.Fragment>
-      )}
+      <i className={!hasSubmitted ? classes.invisible : ""}>
+        {isCorrect ? (
+          <CheckCircleTwoTone twoToneColor='#52c41a' />
+        ) : (
+          <CloseCircleTwoTone twoToneColor='#c0392b' />
+        )}
+      </i>
     </Radio.Group>
   );
 };
